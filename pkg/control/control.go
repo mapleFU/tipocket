@@ -91,7 +91,8 @@ func (c *Controller) Run() {
 
 ROUND:
 	for round := 1; round <= c.cfg.RunRound; round++ {
-		log.Printf("round %d start ...", round)
+		startTime := time.Now()
+		log.Printf("round %d start ....; time is %s", round, startTime.String())
 
 		ctx, cancel := context.WithTimeout(c.ctx, c.cfg.RunTime)
 
@@ -132,7 +133,8 @@ ROUND:
 		default:
 		}
 
-		log.Printf("round %d finish", round)
+		endTime := time.Now()
+		log.Printf("round %d finish; time %s, cost %v", round, endTime.String(), time.Since(startTime))
 	}
 
 	ncancel()
